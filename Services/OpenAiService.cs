@@ -20,6 +20,8 @@ public class OpenAiService
         ArgumentNullException.ThrowIfNullOrEmpty(endpoint);
         ArgumentNullException.ThrowIfNullOrEmpty(key);
 
+        _modelName = modelName;
+
         Uri uri = new(endpoint);
         AzureKeyCredential credential = new(key);
         _client = new(
@@ -53,7 +55,7 @@ public class OpenAiService
 
         return (
             completionText: completions.Choices[0].Message.Content,
-            completionsTokens: completions.Usage.CompletionTokens
+            completionTokens: completions.Usage.CompletionTokens
         );
     }
 
